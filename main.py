@@ -25,6 +25,10 @@ async def start_command(message: types.Message):
 async def help_command(message: types.Message):
     await message.reply(TEXT)
 
+@dp.message()
+async def echo(message: types.Message):
+    await message.answer(message.text)
+
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
