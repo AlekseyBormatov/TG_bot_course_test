@@ -9,6 +9,10 @@ load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 
+TEXT = (
+    '/start - Старт Бота\n'
+    '/help - помощь в навигации'
+)
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -17,8 +21,13 @@ dp = Dispatcher()
 async def start_command(message: types.Message):
     await message.answer('Привет,я учусь писать код!')
 
+@dp.message(Command('help'))
+async def help_command(message: types.Message):
+    await message.reply(TEXT)
+
 
 async def main():
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
